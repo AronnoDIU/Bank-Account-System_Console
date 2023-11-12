@@ -81,6 +81,14 @@ public class BankSystem {
                         double withdrawAmount = userInput.nextDouble();
                         userInput.nextLine();  // Consume the newline character
                         withdrawAccount.withdraw(withdrawAmount);
+
+                        // Check if the withdrawal amount exceeds the account balance
+                        if (withdrawAmount > withdrawAccount.getAccountBalance()) {
+                            System.out.println("Insufficient funds!");
+                            withdrawAccount.withdraw(withdrawAmount
+                                    - withdrawAccount.getAccountBalance());
+                            break;
+                        }
                     } else {
                         System.out.println("Account not found!");
                     }
@@ -112,16 +120,21 @@ public class BankSystem {
 
 /* Expected output:
 
-***Welcome to the Bank Account System!***
+Class BankAccount:
+The BankAccount class represents a bank account with attributes such as account number,
+account holder name, and balance.It provides methods for depositing and withdrawing funds,
+as well as retrieving the account information and displaying the account balance.
 
-Select an option from the menu below:
+Class BankSystem:
+The BankSystem class serves as the main entry point for the bank account system.
+It contains the main method and handles user interactions, such as creating a new account,
+depositing and withdrawing funds, checking the account balance, and exiting the system.
+It utilizes the Bank class to perform account-related operations.
 
-1. Create Account
-2. Deposit Amount
-3. Withdraw Amount
-4. Check Balance
-5. Exit
-
-Enter your desired choice:
+Class Bank:
+The Bank class is responsible for managing a collection of bank accounts.
+It maintains an ArrayList of BankAccount objects and provides methods for adding new accounts,
+finding accounts by account number, and retrieving all accounts.
+It is used by the BankSystem class to perform various operations on bank accounts.
 
 */
