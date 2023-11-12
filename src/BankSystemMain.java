@@ -54,7 +54,9 @@ public class BankSystemMain {
                     double initialBalance = userInput.nextDouble();
                     userInput.nextLine();  // Consume the newline character
                     BankAccount newAccount = new BankAccount(accNumber, accHolder, initialBalance);
+                    String csvString = newAccount.toCSVString();
                     bank.addAccount(newAccount); // Add the new account to the bank
+                    bank.saveAccountsToCSV(); // Save accounts to CSV file
                     break;
 
                 case 2: // For Display Account Information
@@ -64,6 +66,7 @@ public class BankSystemMain {
 
                     if (displayAccount != null) {
                         displayAccount.displayAccountInfo();
+                        bank.saveAccountsToCSV(); // Save accounts to CSV file
                     } else {
                         System.out.println("Account not found!");
                     }
@@ -80,6 +83,7 @@ public class BankSystemMain {
                         double depositAmount = userInput.nextDouble();
                         userInput.nextLine();  // Consume the newline character
                         depositAccount.deposit(depositAmount);
+                        bank.saveAccountsToCSV(); // Save accounts to CSV file
                     } else {
                         System.out.println("Account not found!");
                     }
@@ -95,6 +99,7 @@ public class BankSystemMain {
                         double withdrawAmount = userInput.nextDouble();
                         userInput.nextLine();  // Consume the newline character
                         withdrawAccount.withdraw(withdrawAmount);
+                        bank.saveAccountsToCSV(); // Save accounts to CSV file
 
                         // Check if the withdrawal amount exceeds the account balance
                         if (withdrawAmount > withdrawAccount.getAccountBalance()) {
@@ -129,6 +134,7 @@ public class BankSystemMain {
                     if (closeAccount != null) {
                         closeAccount.closeAccount();
                         bank.removeAccount(closeAccount);
+                        bank.saveAccountsToCSV(); // Save accounts to CSV file
                     } else {
                         System.out.println("Account not found!");
                     }
