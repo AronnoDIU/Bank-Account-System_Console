@@ -4,9 +4,15 @@ class BankAccount {
     private double accountBalance;
 
 
+    public BankAccount(String accountNumber, String accountHolder, double accountBalance) {
+        this.accountNumber = accountNumber;
+        this.accountHolder = accountHolder;
+        this.accountBalance = accountBalance;
+    }
+
     // New method to convert account data to a CSV string
     public String toCSVString() {
-        return accountNumber + "," + accountHolder + "," + accountBalance;
+        return String.format("%s,%s,%.2f", accountNumber, accountHolder, accountBalance);
     }
 
     // New constructor to create a BankAccount from a CSV string
@@ -15,12 +21,6 @@ class BankAccount {
         this.accountNumber = data[0];
         this.accountHolder = data[1];
         this.accountBalance = Double.parseDouble(data[2]);
-    }
-
-    public BankAccount(String accountNumber, String accountHolder, double accountBalance) {
-        this.accountNumber = accountNumber;
-        this.accountHolder = accountHolder;
-        this.accountBalance = accountBalance;
     }
 
     // Getters
@@ -66,9 +66,5 @@ class BankAccount {
         System.out.println("Account Number: " + accountNumber);
         System.out.println("Account Holder: " + accountHolder);
         System.out.println("Account Balance: $" + accountBalance);
-    }
-
-    public double getBalance() {
-        return 0;
     }
 }

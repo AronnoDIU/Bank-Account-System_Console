@@ -5,11 +5,10 @@ public class BankSystemMain {
         Bank bank = new Bank();
         Scanner userInput = new Scanner(System.in);
 
-        // Start the bank system
         while (true) {
-            System.out.println("\n***Welcome to the Bank Account System!***");
-            System.out.println("\nSelect an option from the menu below: ");
-            System.out.println("\n1. Create Account");
+            System.out.println("\n*** Welcome to the Bank Account System! ***");
+            System.out.println("\nSelect an option from the menu below:");
+            System.out.println("1. Create Account");
             System.out.println("2. Display Account Information");
             System.out.println("3. Deposit Amount");
             System.out.println("4. Withdraw Amount");
@@ -21,12 +20,11 @@ public class BankSystemMain {
             int choice = userInput.nextInt();
             userInput.nextLine();  // Consume the newline character after reading the choice
 
-            switch (choice) { // Perform the desired action based on the user's choice
-                case 1: // For Create a new account
+            switch (choice) {
+                case 1:
                     System.out.print("Enter account number: ");
                     String accNumber = userInput.nextLine();
 
-                    // Check if the account number already exists
                     if (bank.findAccount(accNumber) != null) {
                         System.out.println("Account already exists!");
                         break;
@@ -35,7 +33,6 @@ public class BankSystemMain {
                     System.out.print("Enter account holder name: ");
                     String accHolder = userInput.nextLine();
 
-                    // Check if the account holder name already exists
                     boolean accountExists = false;
                     for (BankAccount account : bank.getAccounts()) {
                         if (account.getAccountHolder().equals(accHolder)) {
@@ -49,47 +46,52 @@ public class BankSystemMain {
                         break;
                     }
 
-                    // Create a new account if the account number and holder name are unique.
                     System.out.print("Enter initial balance: $");
                     double initialBalance = userInput.nextDouble();
                     userInput.nextLine();  // Consume the newline character
                     BankAccount newAccount = new BankAccount(accNumber, accHolder, initialBalance);
+
+                    // Add the new account to the bank list
+                    bank.addAccount(newAccount);
+
+                    // Use the toCSVString method to get the CSV representation
                     String csvString = newAccount.toCSVString();
-                    bank.addAccount(newAccount); // Add the new account to the bank
-                    bank.saveAccountsToCSV(); // Save accounts to CSV file
+
+                    // Print or save the CSV string as needed
+                    System.out.println("CSV Representation: " + csvString);
+
+                    // Save the CSV string to a file
+                    bank.saveAccountsToCSV("accounts.csv", csvString);
                     break;
 
-                case 2: // For Display Account Information
+                case 2:
                     System.out.print("Enter account number: ");
                     String displayAccNumber = userInput.nextLine();
                     BankAccount displayAccount = bank.findAccount(displayAccNumber);
 
                     if (displayAccount != null) {
                         displayAccount.displayAccountInfo();
-                        bank.saveAccountsToCSV(); // Save accounts to CSV file
                     } else {
                         System.out.println("Account not found!");
                     }
                     break;
 
-                case 3: // For Deposit Amount
+                case 3:
                     System.out.print("Enter account number: ");
                     String depositAccNumber = userInput.nextLine();
                     BankAccount depositAccount = bank.findAccount(depositAccNumber);
 
                     if (depositAccount != null) {
-                        // Deposit
                         System.out.print("Enter deposit amount: $");
                         double depositAmount = userInput.nextDouble();
                         userInput.nextLine();  // Consume the newline character
                         depositAccount.deposit(depositAmount);
-                        bank.saveAccountsToCSV(); // Save accounts to CSV file
                     } else {
                         System.out.println("Account not found!");
                     }
                     break;
 
-                case 4: // For Withdraw Amount
+                case 4:
                     System.out.print("Enter account number: ");
                     String withdrawAccNumber = userInput.nextLine();
                     BankAccount withdrawAccount = bank.findAccount(withdrawAccNumber);
@@ -99,13 +101,10 @@ public class BankSystemMain {
                         double withdrawAmount = userInput.nextDouble();
                         userInput.nextLine();  // Consume the newline character
                         withdrawAccount.withdraw(withdrawAmount);
-                        bank.saveAccountsToCSV(); // Save accounts to CSV file
 
-                        // Check if the withdrawal amount exceeds the account balance
                         if (withdrawAmount > withdrawAccount.getAccountBalance()) {
                             System.out.println("Insufficient funds!");
-                            withdrawAccount.withdraw(withdrawAmount
-                                    - withdrawAccount.getAccountBalance());
+                            withdrawAccount.withdraw(withdrawAmount - withdrawAccount.getAccountBalance());
                             break;
                         }
                     } else {
@@ -113,7 +112,7 @@ public class BankSystemMain {
                     }
                     break;
 
-                case 5: // For Check Balance
+                case 5:
                     System.out.print("Enter account number: ");
                     String balanceAccNumber = userInput.nextLine();
                     BankAccount balanceAccount = bank.findAccount(balanceAccNumber);
@@ -125,28 +124,26 @@ public class BankSystemMain {
                     }
                     break;
 
-                case 6: // For Close Account
+                case 6:
                     System.out.print("Enter account number: ");
                     String closeAccNumber = userInput.nextLine();
                     BankAccount closeAccount = bank.findAccount(closeAccNumber);
 
-                    // Check if the account exists and close it
                     if (closeAccount != null) {
                         closeAccount.closeAccount();
                         bank.removeAccount(closeAccount);
-                        bank.saveAccountsToCSV(); // Save accounts to CSV file
                     } else {
                         System.out.println("Account not found!");
                     }
                     break;
 
-                case 7: // For Exit
-                    System.out.println("Exiting the system.Thank you for using the Bank!");
+                case 7:
+                    System.out.println("Exiting the system. Thank you for using the Bank!");
                     System.exit(0);
                     break;
 
                 default:
-                    System.out.println("Invalid choice. Please try again!.");
+                    System.out.println("Invalid choice. Please try again.");
             }
         }
     }
