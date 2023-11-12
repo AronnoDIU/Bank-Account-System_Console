@@ -20,4 +20,8 @@ class Bank {
         }
         return null;
     }
+
+    public BankAccount[] getAccounts() {
+        return new BankAccount[0];
+    }
 }

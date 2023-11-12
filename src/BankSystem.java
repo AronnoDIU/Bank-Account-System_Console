@@ -3,64 +3,94 @@ import java.util.Scanner;
 public class BankSystem {
     public static void main(String[] args) {
         Bank bank = new Bank();
-        Scanner scanner = new Scanner(System.in);
+        Scanner userInput = new Scanner(System.in);
 
+        // Start the bank system
         while (true) {
+            System.out.println("\n***Welcome to the Bank Account System!***");
+            System.out.println("\nSelect an option from the menu below: ");
             System.out.println("\n1. Create Account");
-            System.out.println("2. Deposit");
-            System.out.println("3. Withdraw");
+            System.out.println("2. Deposit Amount");
+            System.out.println("3. Withdraw Amount");
             System.out.println("4. Check Balance");
             System.out.println("5. Exit");
-            System.out.print("Enter your choice: ");
+            System.out.print("\nEnter your desired choice: ");
 
-            int choice = scanner.nextInt();
-            scanner.nextLine();  // Consume the newline character
+            int choice = userInput.nextInt();
+            userInput.nextLine();  // Consume the newline character after reading the choice
 
-            switch (choice) {
-                case 1:
+            switch (choice) { // Perform the desired action based on the user's choice
+                case 1: // For Create a new account
                     System.out.print("Enter account number: ");
-                    String accNumber = scanner.nextLine();
+                    String accNumber = userInput.nextLine();
+
+                    // Check if the account number already exists
+                    if (bank.findAccount(accNumber) != null) {
+                        System.out.println("Account already exists!");
+                        break;
+                    }
+
                     System.out.print("Enter account holder name: ");
-                    String accHolder = scanner.nextLine();
+                    String accHolder = userInput.nextLine();
+
+                    // Check if the account holder name already exists
+                    boolean accountExists = false;
+                    for (BankAccount account : bank.getAccounts()) {
+                        if (account.getAccountHolder().equals(accHolder)) {
+                            accountExists = true;
+                            break;
+                        }
+                    }
+
+                    if (accountExists) {
+                        System.out.println("Account holder name already exists!");
+                        break;
+                    }
+
+                    // Create a new account if the account number and holder name are unique.
                     System.out.print("Enter initial balance: $");
-                    double initialBalance = scanner.nextDouble();
-                    scanner.nextLine();  // Consume the newline character
+                    double initialBalance = userInput.nextDouble();
+                    userInput.nextLine();  // Consume the newline character
                     BankAccount newAccount = new BankAccount(accNumber, accHolder, initialBalance);
-                    bank.addAccount(newAccount);
+                    bank.addAccount(newAccount); // Add the new account to the bank
                     break;
 
-                case 2:
+                case 2: // For Deposit Amount
                     System.out.print("Enter account number: ");
-                    String depositAccNumber = scanner.nextLine();
+                    String depositAccNumber = userInput.nextLine();
                     BankAccount depositAccount = bank.findAccount(depositAccNumber);
+
                     if (depositAccount != null) {
+                        // Deposit
                         System.out.print("Enter deposit amount: $");
-                        double depositAmount = scanner.nextDouble();
-                        scanner.nextLine();  // Consume the newline character
+                        double depositAmount = userInput.nextDouble();
+                        userInput.nextLine();  // Consume the newline character
                         depositAccount.deposit(depositAmount);
                     } else {
                         System.out.println("Account not found!");
                     }
                     break;
 
-                case 3:
+                case 3: // For Withdraw Amount
                     System.out.print("Enter account number: ");
-                    String withdrawAccNumber = scanner.nextLine();
+                    String withdrawAccNumber = userInput.nextLine();
                     BankAccount withdrawAccount = bank.findAccount(withdrawAccNumber);
+
                     if (withdrawAccount != null) {
                         System.out.print("Enter withdrawal amount: $");
-                        double withdrawAmount = scanner.nextDouble();
-                        scanner.nextLine();  // Consume the newline character
+                        double withdrawAmount = userInput.nextDouble();
+                        userInput.nextLine();  // Consume the newline character
                         withdrawAccount.withdraw(withdrawAmount);
                     } else {
                         System.out.println("Account not found!");
                     }
                     break;
 
-                case 4:
+                case 4: // For Check Balance
                     System.out.print("Enter account number: ");
-                    String balanceAccNumber = scanner.nextLine();
+                    String balanceAccNumber = userInput.nextLine();
                     BankAccount balanceAccount = bank.findAccount(balanceAccNumber);
+
                     if (balanceAccount != null) {
                         balanceAccount.displayBalance();
                     } else {
@@ -69,7 +99,7 @@ public class BankSystem {
                     break;
 
                 case 5:
-                    System.out.println("Exiting the system. Thank you!");
+                    System.out.println("Exiting the system.Thank you for using the Bank!");
                     System.exit(0);
                     break;
 
@@ -79,3 +109,19 @@ public class BankSystem {
         }
     }
 }
+
+/* Expected output:
+
+***Welcome to the Bank Account System!***
+
+Select an option from the menu below:
+
+1. Create Account
+2. Deposit Amount
+3. Withdraw Amount
+4. Check Balance
+5. Exit
+
+Enter your desired choice:
+
+*/
