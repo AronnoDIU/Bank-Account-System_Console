@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class BankSystem {
+public class BankSystemMain {
     public static void main(String[] args) {
         Bank bank = new Bank();
         Scanner userInput = new Scanner(System.in);
@@ -10,10 +10,12 @@ public class BankSystem {
             System.out.println("\n***Welcome to the Bank Account System!***");
             System.out.println("\nSelect an option from the menu below: ");
             System.out.println("\n1. Create Account");
-            System.out.println("2. Deposit Amount");
-            System.out.println("3. Withdraw Amount");
-            System.out.println("4. Check Balance");
-            System.out.println("5. Exit");
+            System.out.println("2. Display Account Information");
+            System.out.println("3. Deposit Amount");
+            System.out.println("4. Withdraw Amount");
+            System.out.println("5. Check Balance");
+            System.out.println("6. Close Account");
+            System.out.println("7. Exit");
             System.out.print("\nEnter your desired choice: ");
 
             int choice = userInput.nextInt();
@@ -55,7 +57,19 @@ public class BankSystem {
                     bank.addAccount(newAccount); // Add the new account to the bank
                     break;
 
-                case 2: // For Deposit Amount
+                case 2: // For Display Account Information
+                    System.out.print("Enter account number: ");
+                    String displayAccNumber = userInput.nextLine();
+                    BankAccount displayAccount = bank.findAccount(displayAccNumber);
+
+                    if (displayAccount != null) {
+                        displayAccount.displayAccountInfo();
+                    } else {
+                        System.out.println("Account not found!");
+                    }
+                    break;
+
+                case 3: // For Deposit Amount
                     System.out.print("Enter account number: ");
                     String depositAccNumber = userInput.nextLine();
                     BankAccount depositAccount = bank.findAccount(depositAccNumber);
@@ -71,7 +85,7 @@ public class BankSystem {
                     }
                     break;
 
-                case 3: // For Withdraw Amount
+                case 4: // For Withdraw Amount
                     System.out.print("Enter account number: ");
                     String withdrawAccNumber = userInput.nextLine();
                     BankAccount withdrawAccount = bank.findAccount(withdrawAccNumber);
@@ -94,7 +108,7 @@ public class BankSystem {
                     }
                     break;
 
-                case 4: // For Check Balance
+                case 5: // For Check Balance
                     System.out.print("Enter account number: ");
                     String balanceAccNumber = userInput.nextLine();
                     BankAccount balanceAccount = bank.findAccount(balanceAccNumber);
@@ -106,7 +120,21 @@ public class BankSystem {
                     }
                     break;
 
-                case 5:
+                case 6: // For Close Account
+                    System.out.print("Enter account number: ");
+                    String closeAccNumber = userInput.nextLine();
+                    BankAccount closeAccount = bank.findAccount(closeAccNumber);
+
+                    // Check if the account exists and close it
+                    if (closeAccount != null) {
+                        closeAccount.closeAccount();
+                        bank.removeAccount(closeAccount);
+                    } else {
+                        System.out.println("Account not found!");
+                    }
+                    break;
+
+                case 7: // For Exit
                     System.out.println("Exiting the system.Thank you for using the Bank!");
                     System.exit(0);
                     break;
@@ -125,8 +153,8 @@ The BankAccount class represents a bank account with attributes such as account 
 account holder name, and balance.It provides methods for depositing and withdrawing funds,
 as well as retrieving the account information and displaying the account balance.
 
-Class BankSystem:
-The BankSystem class serves as the main entry point for the bank account system.
+Class BankSystemMain:
+The BankSystemMain class serves as the main entry point for the bank account system.
 It contains the main method and handles user interactions, such as creating a new account,
 depositing and withdrawing funds, checking the account balance, and exiting the system.
 It utilizes the Bank class to perform account-related operations.
@@ -135,6 +163,6 @@ Class Bank:
 The Bank class is responsible for managing a collection of bank accounts.
 It maintains an ArrayList of BankAccount objects and provides methods for adding new accounts,
 finding accounts by account number, and retrieving all accounts.
-It is used by the BankSystem class to perform various operations on bank accounts.
+It is used by the BankSystemMain class to perform various operations on bank accounts.
 
 */

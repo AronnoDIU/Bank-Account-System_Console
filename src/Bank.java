@@ -30,4 +30,9 @@ class Bank {
     public BankAccount[] getAccounts() {
         return new BankAccount[0];
     }
+
+    // Remove an account from the list of accounts
+    public void removeAccount(BankAccount closeAccount) {
+        accounts.remove(closeAccount);
+    }
 }

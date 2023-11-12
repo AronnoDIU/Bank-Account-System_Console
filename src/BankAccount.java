@@ -9,6 +9,7 @@ class BankAccount {
         this.accountBalance = accountBalance;
     }
 
+    // Getters
     public String getAccountNumber() {
         return accountNumber;
     }
@@ -39,5 +40,17 @@ class BankAccount {
 
     public void displayBalance() {
         System.out.println("Current Balance: $" + accountBalance);
+    }
+
+    public void closeAccount() {
+        System.out.println("Account number " + accountNumber
+                + " has been closed successfully!");
+        System.out.println("Goodbye!");
+    }
+
+    public void displayAccountInfo() {
+        System.out.println("Account Number: " + accountNumber);
+        System.out.println("Account Holder: " + accountHolder);
+        System.out.println("Account Balance: $" + accountBalance);
     }
 }
