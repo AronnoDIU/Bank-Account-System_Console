@@ -6,13 +6,18 @@ A simple console-based bank account system that allows users to perform basic ba
 
 - [Introduction](#introduction)
 - [Features](#features)
+- [Author](#author)
 - [Installation](#installation)
 - [Classes](#classes)
     - [BankSystemMain](#banksystemmain)
     - [BankAccount](#bankaccount)
     - [Bank](#bank)
 - [Usage](#usage)
-- [Contributing](#contributing)
+- [Contributions](#contributions)
+- [Contribution Guidelines](#contribution-guidelines)
+- [Acknowledgements](#acknowledgements)
+- [Contact](#contact)
+- [Conclusion](#conclusion)
 - [License](#license)
 
 ## Introduction
@@ -42,6 +47,10 @@ The Bank Account System Console offers the following features:
 - **Account Statement**: Users can view their account statement by entering the account number.
 - **Help**: Users can view the list of available features and commands by entering the help command.
 - **Exit**: Users can exit the system by entering the exit command.
+
+## Author
+
+The Bank Account System Console was created by [AronnoDIU](https://github.com/AronnoDIU).
 
 ## Installation
 
@@ -144,6 +153,29 @@ To use the banking system, you can follow these steps:
 12. Use the `get_name` method to get the name of the bank.
 13. Use the `get_accounts` method to get the list of bank accounts associated with the bank.
 14. Use the `display_account_history` method to display the account history of the bank.
+
+## Contributions
+
+If you have any contributions or suggestions, please feel free to open an issue or pull request on GitHub.
+
+## Contribution Guidelines
+
+please read the [CONTRIBUTING.md](CONTRIBUTING.md) file for more details.
+
+## Acknowledgements
+
+The following people have contributed to this project:
+
+- [Arafat](https://github.com/ArAfAt)
+
+## Contact
+
+If you have any questions or comments, 
+please feel free to contact us at [https://www.linkedin.com/in/yeasirarafataronno/].
+
+## Conclusion
+
+Thank you for using the Bank System. I hope you enjoy using it. Happy coding!
 
 ## License
 

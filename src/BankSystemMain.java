@@ -2,10 +2,10 @@ import java.util.Scanner;
 
 public class BankSystemMain {
     public static void main(String[] args) {
-        Bank bank = new Bank();
-        Scanner userInput = new Scanner(System.in);
+        Bank bank = new Bank(); // Create a new bank object
+        Scanner userInput = new Scanner(System.in); // Create a new scanner object
 
-        while (true) {
+        while (true) { // Loop until the user chooses to exit
             System.out.println("\n*** Welcome to the Bank Account System! ***");
             System.out.println("\nSelect an option from the menu below:");
             System.out.println("1. Create Account");
@@ -20,14 +20,15 @@ public class BankSystemMain {
             System.out.println("10. Exit");
             System.out.print("\nEnter your desired choice: ");
 
-            int choice = userInput.nextInt();
+            int choice = userInput.nextInt(); // Read the user's choice
             userInput.nextLine();  // Consume the newline character after reading the choice
 
-            switch (choice) {
+            switch (choice) { // Switch on the user's choice
                 case 1: // For Create Account option
                     System.out.print("Enter account number: ");
                     String accNumber = userInput.nextLine();
 
+                    // Check if the account number already exists
                     if (bank.findAccount(accNumber) != null) {
                         System.out.println("Account already exists!");
                         break;
@@ -37,21 +38,27 @@ public class BankSystemMain {
                     String accHolder = userInput.nextLine();
 
                     boolean accountExists = false;
+
                     for (BankAccount account : bank.getAccounts()) {
+
+                        // Check if the account holder name already exists
                         if (account.getAccountHolder().equals(accHolder)) {
-                            accountExists = true;
+                            accountExists = true; // Set the flag to true
                             break;
                         }
                     }
 
+                    // Check if the account holder name already exists
                     if (accountExists) {
                         System.out.println("Account holder name already exists!");
                         break;
                     }
 
                     System.out.print("Enter initial balance: $");
-                    double initialBalance = userInput.nextDouble();
+                    double initialBalance = userInput.nextDouble(); // Read the initial balance
                     userInput.nextLine();  // Consume the newline character
+
+                    // Create a new account
                     BankAccount newAccount = new BankAccount(accNumber, accHolder, initialBalance);
 
                     // Add the new account to the bank list
@@ -72,8 +79,9 @@ public class BankSystemMain {
                     String displayAccNumber = userInput.nextLine();
                     BankAccount displayAccount = bank.findAccount(displayAccNumber);
 
+                    // Check if the account exists
                     if (displayAccount != null) {
-                        displayAccount.displayAccountInfo();
+                        displayAccount.displayAccountInfo(); // Display the account information
                     } else {
                         System.out.println("Account not found!");
                     }
@@ -82,12 +90,16 @@ public class BankSystemMain {
                 case 3: // For Deposit Amount
                     System.out.print("Enter account number: ");
                     String depositAccNumber = userInput.nextLine();
+
                     BankAccount depositAccount = bank.findAccount(depositAccNumber);
 
+                    // Check if the account exists
                     if (depositAccount != null) {
                         System.out.print("Enter deposit amount: $");
                         double depositAmount = userInput.nextDouble();
                         userInput.nextLine();  // Consume the newline character
+
+                        // Deposit the amount into the account balance
                         depositAccount.deposit(depositAmount);
                     } else {
                         System.out.println("Account not found!");
@@ -97,17 +109,25 @@ public class BankSystemMain {
                 case 4: // For Withdraw Amount
                     System.out.print("Enter account number: ");
                     String withdrawAccNumber = userInput.nextLine();
+
                     BankAccount withdrawAccount = bank.findAccount(withdrawAccNumber);
 
+                    // Check if the account exists
                     if (withdrawAccount != null) {
                         System.out.print("Enter withdrawal amount: $");
                         double withdrawAmount = userInput.nextDouble();
                         userInput.nextLine();  // Consume the newline character
+
+                        // Withdraw the amount from the account balance
                         withdrawAccount.withdraw(withdrawAmount);
 
+                        // Check if the withdrawal amount exceeds the account balance
                         if (withdrawAmount > withdrawAccount.getAccountBalance()) {
                             System.out.println("Insufficient funds!");
-                            withdrawAccount.withdraw(withdrawAmount - withdrawAccount.getAccountBalance());
+
+                            // Withdraw the difference from the account balance
+                            withdrawAccount.withdraw(withdrawAmount
+                                        - withdrawAccount.getAccountBalance());
                             break;
                         }
                     } else {
@@ -118,10 +138,12 @@ public class BankSystemMain {
                 case 5: // For Account Balance
                     System.out.print("Enter account number: ");
                     String balanceAccNumber = userInput.nextLine();
+
                     BankAccount balanceAccount = bank.findAccount(balanceAccNumber);
 
+                    // Check if the account exists
                     if (balanceAccount != null) {
-                        balanceAccount.displayBalance();
+                        balanceAccount.displayBalance(); // Display the account balance
                     } else {
                         System.out.println("Account not found!");
                     }
@@ -130,10 +152,16 @@ public class BankSystemMain {
                 case 6: // For Close Account
                     System.out.print("Enter account number: ");
                     String closeAccNumber = userInput.nextLine();
+
                     BankAccount closeAccount = bank.findAccount(closeAccNumber);
 
+                    // Check if the account exists
                     if (closeAccount != null) {
+
+                        // Close the account
                         closeAccount.closeAccount();
+
+                        // Remove the account from the list
                         bank.removeAccount(closeAccount);
                     } else {
                         System.out.println("Account not found!");
@@ -143,12 +171,15 @@ public class BankSystemMain {
                 case 7: // For Fund Transfer
                     System.out.print("Enter your account number: ");
                     String fromAccountNumber = userInput.nextLine();
+
                     BankAccount fromAccount = bank.findAccount(fromAccountNumber);
 
                     // Check if an account exists
                     if (fromAccount != null) {
                         System.out.print("Enter recipient's account number: ");
                         String toAccountNumber = userInput.nextLine();
+
+                        // Find the recipient's account in the list of accounts
                         BankAccount toAccount = bank.findAccount(toAccountNumber);
 
                         // Check if the recipient's account exists
@@ -161,8 +192,12 @@ public class BankSystemMain {
                             if (fromAccount.getAccountBalance() >= transferAmount) {
 
                                 // Perform the fund transfer
+                                // Withdraw from the sender's account
                                 fromAccount.withdraw(transferAmount);
+
+                                // Add the transfer amount to the recipient's account
                                 toAccount.deposit(transferAmount);
+
                                 System.out.println("Fund transfer successful!");
                             } else {
                                 System.out.println("Insufficient funds for transfer.");
@@ -178,9 +213,13 @@ public class BankSystemMain {
                 case 8:
                     System.out.print("Enter account number: ");
                     String statementAccNumber = userInput.nextLine();
+
                     BankAccount statementAccount = bank.findAccount(statementAccNumber);
 
+                    // Check if the account exists
                     if (statementAccount != null) {
+
+                        // Display the account statement
                         statementAccount.displayAccountStatement();
                     } else {
                         System.out.println("Account not found!");
@@ -188,7 +227,7 @@ public class BankSystemMain {
                     break;
 
                 case 9: // For Help Feature
-                    displayHelp();
+                    displayHelp(); // Display the help message
                     break;
 
                 case 10:
@@ -202,6 +241,7 @@ public class BankSystemMain {
         }
     }
 
+    // Method to display the help message for the user
     private static void displayHelp() {
         System.out.println("\n--- Help ---");
         System.out.println("1. Create Account: Create a new bank account.");
