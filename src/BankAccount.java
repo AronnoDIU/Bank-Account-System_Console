@@ -1,13 +1,17 @@
+import java.util.ArrayList;
+import java.util.List;
+
 class BankAccount {
     private final String accountNumber;
     private final String accountHolder;
     private double accountBalance;
-
+    private List<String> transactions;  // List to store account transactions
 
     public BankAccount(String accountNumber, String accountHolder, double accountBalance) {
         this.accountNumber = accountNumber;
         this.accountHolder = accountHolder;
         this.accountBalance = accountBalance;
+        this.transactions = new ArrayList<>();
     }
 
     // New method to convert account data to a CSV string
@@ -39,17 +43,27 @@ class BankAccount {
     public void deposit(double amount) {
         accountBalance += amount;
         System.out.println("Deposited: $" + amount);
+        transactions.add("Deposit: $" + amount);
         displayBalance();
     }
 
     public void withdraw(double amount) {
         if (amount <= accountBalance) {
             accountBalance -= amount;
+            transactions.add("Withdrawal: $" + amount);
             System.out.println("Withdrawn: $" + amount);
         } else {
             System.out.println("Insufficient funds");
         }
         displayBalance();
+    }
+
+    public void displayAccountStatement() {
+        System.out.println("\n--- Account Statement for Account Number: " + accountNumber + " ---");
+        for (String transaction : transactions) {
+            System.out.println(transaction);
+        }
+        System.out.println("--- End of Statement ---");
     }
 
     public void displayBalance() {
