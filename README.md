@@ -90,7 +90,7 @@ The `BankAccount` class represents a bank account. It has the following attribut
 #### Constructors
 
 - `BankAccount(String name, double initialDeposit, String accountType)`: Creates a new bank account with the specified name, initial deposit amount, and account type.
-- `BankAccount()`: Creates a new bank account.
+- `BankAccount(String csv)`: Creates a new bank account from a CSV string.
 
 #### Methods
 
@@ -166,12 +166,13 @@ please read the [CONTRIBUTING.md](CONTRIBUTING.md) file for more details.
 
 The following people have contributed to this project:
 
-- [Arafat](https://github.com/ArAfAt)
+- [Yasir Arafat Aronno](https://github.com/AronnoDIU)
 
 ## Contact
 
 If you have any questions or comments, 
-please feel free to contact us at [https://www.linkedin.com/in/yeasirarafataronno/].
+please feel free to contact us at <br>
+[https://www.linkedin.com/in/yeasirarafataronno/].
 
 ## Conclusion
 
