@@ -214,6 +214,7 @@ public class BankSystemMain {
                     System.out.print("Enter account number: ");
                     String statementAccNumber = userInput.nextLine();
 
+                    // Find the account in the list of accounts
                     BankAccount statementAccount = bank.findAccount(statementAccNumber);
 
                     // Check if the account exists
