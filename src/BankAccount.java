@@ -16,10 +16,11 @@ class BankAccount {
 
     // Create a BankAccount from a CSV string
     public BankAccount(String csv) {
-        String[] data = csv.split(",");
+        String[] data = csv.split(","); // Split the CSV string into an array of strings
         this.accountNumber = data[0];
         this.accountHolder = data[1];
         this.accountBalance = Double.parseDouble(data[2]);
+        // Initialize the list of transactions for the account
     }
 
     // Convert account data to a CSV string
