@@ -258,24 +258,3 @@ public class BankSystemMain {
         System.out.println("--- End of Help ---");
     }
 }
-
-/* Expected output:
-
-Class BankAccount:
-The BankAccount class represents a bank account with attributes such as account number,
-account holder name, and balance.It provides methods for depositing and withdrawing funds,
-as well as retrieving the account information and displaying the account balance.
-
-Class BankSystemMain:
-The BankSystemMain class serves as the main entry point for the bank account system.
-It contains the main method and handles user interactions, such as creating a new account,
-depositing and withdrawing funds, checking the account balance, and exiting the system.
-It utilizes the Bank class to perform account-related operations.
-
-Class Bank:
-The Bank class is responsible for managing a collection of bank accounts.
-It maintains an ArrayList of BankAccount objects and provides methods for adding new accounts,
-finding accounts by account number, and retrieving all accounts.
-It is used by the BankSystemMain class to perform various operations on bank accounts.
-
-*/
